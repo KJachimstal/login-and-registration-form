@@ -19,8 +19,12 @@
         $login = $_POST['login'];
         $password = $_POST['password'];
 
-        $query = "SELECT * FROM users WHERE login='$login' and password='$password'";
-        if($result = $connection->query($query))
+        $login = htmlentities($login, ENT_QUOTES, "UTF-8");
+        $password = htmlentities($password, ENT_QUOTES, "UTF-8");
+
+        if($result = $connection->query(sprintf("SELECT * FROM users WHERE login='%s' and password='%s'",
+        mysqli_real_escape_string($connection, $login),
+        mysqli_real_escape_string($connection, $password))))
         {
             $user_count = $result->num_rows;
             if($user_count > 0)
