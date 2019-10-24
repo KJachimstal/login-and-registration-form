@@ -10,6 +10,16 @@
     <title>Account</title>
 </head>
 <body>
+
+<?php
+
+   echo "<h1>Wellcome ".$_SESSION['name']."!</h1>";
+   echo "<h2>Data: </h2>";
+   echo "<b>Email:</b> ".$_SESSION['email'];
+   echo "<br/> <b>Name:</b> ".$_SESSION['name'];
+   echo "<br/> <b>Surname:</b> ".$_SESSION['surname'];
+
+?>
     
 </body>
 </html>
