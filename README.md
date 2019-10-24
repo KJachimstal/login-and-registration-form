@@ -1,4 +1,4 @@
 # login-and-registration-form
-User registration system
+User login and registration system
 
 This project based on XAMPP. 
