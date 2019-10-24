@@ -26,6 +26,7 @@
                 $_SESSION['surname'] = $row['surname'];
                 
                 $result->close();
+                header('Location:account.php');
             }
             else
             {
