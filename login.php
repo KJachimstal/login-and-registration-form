@@ -25,12 +25,14 @@
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['surname'] = $row['surname'];
                 
+                unset($_SESSION['error']);
                 $result->close();
                 header('Location:account.php');
             }
             else
             {
-                
+                $_SESSION['error'] = '<br/><font color="red">Wrong login or password!</font>';
+                header('Location:index.php');
             }
         }
 
