@@ -18,6 +18,7 @@
    echo "<b>Email:</b> ".$_SESSION['email'];
    echo "<br/> <b>Name:</b> ".$_SESSION['name'];
    echo "<br/> <b>Surname:</b> ".$_SESSION['surname'];
+   echo "<br/><br/><a href='logout.php'>Logout</a>";
 
 ?>
     
