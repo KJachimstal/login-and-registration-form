@@ -31,6 +31,20 @@
         }
 
         //Password verification
+        $password = $_POST['password'];
+        $password_r = $_POST['password_r'];
+
+        if(strlen($password) < 8 || strlen($password) > 20)
+        {
+            $verification = false;
+            $_SESSION['err_password'] = "Password must be between 8 and 20 characters!";
+        }
+
+        if($password != $password_r)
+        {
+            $verification = false;
+            $_SESSION['err_password'] = "Passwords do not match!";
+        }
 
         //Name verification
 
@@ -83,6 +97,15 @@
         ?>
 
         Password: <br/> <input type="password" name="password" /><br/>
+
+        <?php
+            if(isset($_SESSION['err_password']))
+            {
+                ECHO '<div class="error">'.$_SESSION['err_password'].'</div>';
+                unset($_SESSION['err_password']);
+            }
+        ?>
+
         Repeat password: <br/> <input type="password" name="password_r" /><br/>
         Name: <br/> <input type="text" name="name" /><br/>
         Surname: <br/> <input type="text" name="surname" /><br/>
