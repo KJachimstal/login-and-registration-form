@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once "connection.php";
     $connection = @new mysqli($host, $db_user, $db_password, $db_name);
 
@@ -14,10 +15,17 @@
         $query = "SELECT * FROM users WHERE login='$login' and password='$password'";
         if($result = $connection->query($query))
         {
-            $user_count = $result->fetch_assoc();
+            $user_count = $result->num_rows;
             if($user_count > 0)
             {
+                $row = $result->fetch_assoc();
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['login'] = $row['login'];
+                $_SESSION['password'] = $row['password'];
+                $_SESSION['name'] = $row['name'];
+                $_SESSION['surname'] = $row['surname'];
                 
+                $result->close();
             }
             else
             {
