@@ -1,4 +1,33 @@
 <?php
+    session_start();
+
+    if(isset($_POST['email']))
+    {
+        $verification = true;
+
+        //Email verification
+
+        $email = $_POST['email'];
+        $filtered_email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+        if((filter_var($filtered_email, FILTER_VALIDATE_EMAIL) == false) || ($filtered_email != $email))
+        {
+            $verification = false;
+            $_SESSION['err_email'] = "Please enter a valid mail!";
+        } 
+
+        //Login verification
+
+        //Password verification
+
+        //Name verification
+
+        //Surname verification
+
+        //Checkbox verification
+
+        //CAPTCHA verification
+    }
 
 ?>
 
@@ -10,11 +39,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registration</title>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        .error
+        {
+            color:red;
+            margin:10px 0px 10px 0px;
+        }
+    </style>
 </head>
 <body>
     
     <form method="post">
         E-mail: <br/> <input type="text" name="email" /><br/>
+
+        <?php
+            if(isset($_SESSION['err_email']))
+            {
+                ECHO '<div class="error">'.$_SESSION['err_email'].'</div>';
+                unset($_SESSION['err_email']);
+            }
+        ?>
+        
         Login: <br/> <input type="text" name="login" /><br/>
         Password: <br/> <input type="password" name="password" /><br/>
         Repeat password: <br/> <input type="password" name="password_r" /><br/>
