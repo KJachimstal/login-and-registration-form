@@ -19,6 +19,8 @@
 <body>
     <h1>Wellcome to login and registration form!</h1>
     <h2>Please log in or sing up ;)</h2>
+    
+    <a href="registration.php">Sign in</a>
 
     <br/><br/>
 
