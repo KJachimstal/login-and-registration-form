@@ -18,7 +18,10 @@
             $user_count = $result->num_rows;
             if($user_count > 0)
             {
+                $_SESSION['logged '] = true;
+
                 $row = $result->fetch_assoc();
+                $_SESSION['id'] = $row['id'];
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['login'] = $row['login'];
                 $_SESSION['password'] = $row['password'];
