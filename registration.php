@@ -47,8 +47,22 @@
         }
 
         //Name verification
+        $name = $_POST['name'];
+
+        if(strlen($name) < 3 || strlen($name) > 20)
+        {
+            $verification = false;
+            $_SESSION['err_name'] = "Name must be between 3 and 20 characters!";
+        }
 
         //Surname verification
+        $surname = $_POST['surname'];
+
+        if(strlen($surname) < 3 || strlen($surname) > 20)
+        {
+            $verification = false;
+            $_SESSION['err_surname'] = "Surname must be between 3 and 20 characters!";
+        }
 
         //Checkbox verification
 
@@ -108,7 +122,25 @@
 
         Repeat password: <br/> <input type="password" name="password_r" /><br/>
         Name: <br/> <input type="text" name="name" /><br/>
+
+        <?php
+            if(isset($_SESSION['err_name']))
+            {
+                ECHO '<div class="error">'.$_SESSION['err_name'].'</div>';
+                unset($_SESSION['err_name']);
+            }
+        ?>
+
         Surname: <br/> <input type="text" name="surname" /><br/>
+
+        <?php
+            if(isset($_SESSION['err_surname']))
+            {
+                ECHO '<div class="error">'.$_SESSION['err_surname'].'</div>';
+                unset($_SESSION['err_surname']);
+            }
+        ?>
+
         <label><input type="checkbox" name="reg">Accept the regulations</label>
         <div class="g-recaptcha" data-sitekey="6LeKZr8UAAAAAKtSJvJmWXBmuIX0Lh4INs_8RG0I"></div>
         <input type="submit" value="Send" />
