@@ -18,7 +18,7 @@
             $user_count = $result->num_rows;
             if($user_count > 0)
             {
-                $_SESSION['logged '] = true;
+                $_SESSION['logged'] = true;
 
                 $row = $result->fetch_assoc();
                 $_SESSION['id'] = $row['id'];
