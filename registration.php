@@ -24,6 +24,12 @@
             $_SESSION['err_login'] = "Login must be between 3 and 20 characters!";
         }
 
+        if(ctype_alnum($login) == false)
+        {
+            $verification = false;
+            $_SESSION['err_login'] = "Login must contain only letters and numbers!";
+        }
+
         //Password verification
 
         //Name verification
