@@ -6,7 +6,6 @@
         $verification = true;
 
         //Email verification
-
         $email = $_POST['email'];
         $filtered_email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
@@ -17,6 +16,13 @@
         } 
 
         //Login verification
+        $login = $_POST['login'];
+
+        if(strlen($login) < 3 || strlen($login) > 20)
+        {
+            $verification = false;
+            $_SESSION['err_login'] = "Login must be between 3 and 20 characters!";
+        }
 
         //Password verification
 
@@ -61,6 +67,15 @@
         ?>
         
         Login: <br/> <input type="text" name="login" /><br/>
+
+        <?php
+            if(isset($_SESSION['err_login']))
+            {
+                ECHO '<div class="error">'.$_SESSION['err_login'].'</div>';
+                unset($_SESSION['err_login']);
+            }
+        ?>
+
         Password: <br/> <input type="password" name="password" /><br/>
         Repeat password: <br/> <input type="password" name="password_r" /><br/>
         Name: <br/> <input type="text" name="name" /><br/>
