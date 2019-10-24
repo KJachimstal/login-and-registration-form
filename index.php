@@ -10,5 +10,13 @@
     <h1>Wellcome to login and registration form!</h1>
     <h2>Please log in or sing up ;)</h2>
 
+    <br/><br/>
+
+    <form action="login.php" method="post">
+        Login: <br/> <input type="text" name="login" /><br/>
+        Password: <br/> <input type="password" name="password" /><br/><br/>
+        <input type="submit" value="Login" />
+    </form>
+
 </body>
 </html>
