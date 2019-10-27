@@ -74,6 +74,16 @@
         }
 
         //CAPTCHA verification
+        $captcha = "6LeKZr8UAAAAABx4OMRa0yT8n9cgOzR_J2o5IpTE";
+
+        $check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$captcha.'&response='.$_POST['g-recaptcha-response']);
+        $answer = json_decode($check);
+
+        if($answer->success == false)
+        {
+            $verification = false;
+            $_SESSION['err_captcha'] = "You have to confirm you are not a robot!";
+        }
     }
 
 ?>
@@ -159,6 +169,15 @@
         ?>
 
         <div class="g-recaptcha" data-sitekey="6LeKZr8UAAAAAKtSJvJmWXBmuIX0Lh4INs_8RG0I"></div>
+
+        <?php
+            if(isset($_SESSION['err_captcha']))
+            {
+                ECHO '<div class="error">'.$_SESSION['err_captcha'].'</div>';
+                unset($_SESSION['err_captcha']);
+            }
+        ?>
+
         <input type="submit" value="Send" />
     </form>
 
