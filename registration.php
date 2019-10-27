@@ -46,6 +46,8 @@
             $_SESSION['err_password'] = "Passwords do not match!";
         }
 
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         //Name verification
         $name = $_POST['name'];
 
