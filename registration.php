@@ -130,7 +130,7 @@
 
                 if($verification == true)
                 {
-                    if($connection->query("INSERT INTO users VALUES (NULL, '$email', '$login', '$password', '$name', '$surname')"))
+                    if($connection->query("INSERT INTO users VALUES (NULL, '$email', '$login', '$hashed_password', '$name', '$surname')"))
                     {
                         $_SESSION['success_registration'];
                         header('Location: wellcome.php');
