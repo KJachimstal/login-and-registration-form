@@ -67,9 +67,7 @@
         }
 
         //Checkbox verification
-        $checkbox = $_POST['reg'];
-
-        if($checkbox == "on")
+        if(!isset($_POST['reg']))
         {
             $verification = false;
             $_SESSION['err_reg'] = "You have to accept the regulations!";
