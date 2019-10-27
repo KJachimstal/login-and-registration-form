@@ -67,6 +67,13 @@
         }
 
         //Checkbox verification
+        $checkbox = $_POST['reg'];
+
+        if($checkbox == "on")
+        {
+            $verification = false;
+            $_SESSION['err_reg'] = "You have to accept the regulations!";
+        }
 
         //CAPTCHA verification
     }
@@ -144,6 +151,15 @@
         ?>
 
         <label><input type="checkbox" name="reg">Accept the regulations</label>
+
+        <?php
+            if(isset($_SESSION['err_reg']))
+            {
+                ECHO '<div class="error">'.$_SESSION['err_reg'].'</div>';
+                unset($_SESSION['err_reg']);
+            }
+        ?>
+
         <div class="g-recaptcha" data-sitekey="6LeKZr8UAAAAAKtSJvJmWXBmuIX0Lh4INs_8RG0I"></div>
         <input type="submit" value="Send" />
     </form>
