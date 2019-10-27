@@ -84,6 +84,57 @@
             $verification = false;
             $_SESSION['err_captcha'] = "You have to confirm you are not a robot!";
         }
+
+        //Checking for duplicate users
+        require_once "connection.php";
+        mysqli_report(MYSQLI_REPORT_STRICT);
+
+        try
+        {
+            $connection = new mysqli($host, $db_user, $db_password, $db_name);
+            
+            if($connection->connect_errno!=0)
+            {
+                throw new Exception();
+            }
+            else
+            {
+                $result = $connection->query("SELECT * FROM users WHERE login='$login'");
+
+                if(!$result)
+                {
+                    throw new Exception($connection->error);
+                }
+
+                $user_count = $result->num_rows;
+                if($user_count > 0)
+                {
+                    $verification = false;
+                    $_SESSION['err_login'] = "This login already exists!";
+                }
+
+
+                $result = $connection->query("SELECT * FROM users WHERE email='$email'");
+
+                if(!$result)
+                {
+                    throw new Exception($connection->error);
+                }
+
+                $user_count = $result->num_rows;
+                if($user_count > 0)
+                {
+                    $verification = false;
+                    $_SESSION['err_email'] = "This email already exists!";
+                }
+
+                $connection->close();
+            }
+        }
+        catch(Exception $connect_exception)
+        {
+            echo '<span style="color:red">Database connection error!</span>';
+        }
     }
 
 ?>
