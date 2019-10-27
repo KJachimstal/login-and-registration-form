@@ -128,6 +128,19 @@
                     $_SESSION['err_email'] = "This email already exists!";
                 }
 
+                if($verification == true)
+                {
+                    if($connection->query("INSERT INTO users VALUES (NULL, '$email', '$login', '$password', '$name', '$surname')"))
+                    {
+                        $_SESSION['success_registration'];
+                        header('Location: wellcome.php');
+                    } 
+                    else
+                    {
+                        throw new Exception($connection->error);
+                    }
+                }
+
                 $connection->close();
             }
         }
