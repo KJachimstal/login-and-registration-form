@@ -85,6 +85,19 @@
             $_SESSION['err_captcha'] = "You have to confirm you are not a robot!";
         }
 
+        //Remember form values
+        $_SESSION['f_email'] = $email;
+        $_SESSION['f_login'] = $login;
+        $_SESSION['f_password'] = $password;
+        $_SESSION['f_password_r'] = $password_r;
+        $_SESSION['f_name'] = $name;
+        $_SESSION['f_surname'] = $surname;
+
+        if(isset($_POST['reg']))
+        {
+            $_SESSION['f_checkbox'] = true;
+        }
+
         //Checking for duplicate users
         require_once "connection.php";
         mysqli_report(MYSQLI_REPORT_STRICT);
@@ -171,7 +184,12 @@
 <body>
     
     <form method="post">
-        E-mail: <br/> <input type="text" name="email" /><br/>
+        E-mail: <br/> <input type="text" name="email" value="<?php
+            if(isset($_SESSION['f_email']))
+            {
+                echo $_SESSION['f_email'];
+            }
+        ?>" /><br/>
 
         <?php
             if(isset($_SESSION['err_email']))
@@ -181,7 +199,12 @@
             }
         ?>
         
-        Login: <br/> <input type="text" name="login" /><br/>
+        Login: <br/> <input type="text" name="login" value="<?php
+            if(isset($_SESSION['f_login']))
+            {
+                echo $_SESSION['f_login'];
+            }
+        ?>" /><br/>
 
         <?php
             if(isset($_SESSION['err_login']))
@@ -191,7 +214,12 @@
             }
         ?>
 
-        Password: <br/> <input type="password" name="password" /><br/>
+        Password: <br/> <input type="password" name="password" value="<?php
+            if(isset($_SESSION['f_password']))
+            {
+                echo $_SESSION['f_password'];
+            }
+        ?>" /><br/>
 
         <?php
             if(isset($_SESSION['err_password']))
@@ -201,8 +229,18 @@
             }
         ?>
 
-        Repeat password: <br/> <input type="password" name="password_r" /><br/>
-        Name: <br/> <input type="text" name="name" /><br/>
+        Repeat password: <br/> <input type="password" name="password_r" value="<?php
+            if(isset($_SESSION['f_password_r']))
+            {
+                echo $_SESSION['f_password_r'];
+            }
+        ?>" /><br/>
+        Name: <br/> <input type="text" name="name" value="<?php
+            if(isset($_SESSION['f_name']))
+            {
+                echo $_SESSION['f_name'];
+            }
+        ?>" /><br/>
 
         <?php
             if(isset($_SESSION['err_name']))
@@ -212,7 +250,12 @@
             }
         ?>
 
-        Surname: <br/> <input type="text" name="surname" /><br/>
+        Surname: <br/> <input type="text" name="surname" value="<?php
+            if(isset($_SESSION['f_surname']))
+            {
+                echo $_SESSION['f_surname'];
+            }
+        ?>" /><br/>
 
         <?php
             if(isset($_SESSION['err_surname']))
@@ -222,7 +265,12 @@
             }
         ?>
 
-        <label><input type="checkbox" name="reg">Accept the regulations</label>
+        <label><input type="checkbox" name="reg" <?php
+            if(isset($_SESSION['f_checkbox']))
+            {
+                echo "checked";
+            }
+        ?>>Accept the regulations</label>
 
         <?php
             if(isset($_SESSION['err_reg']))
